@@ -1,23 +1,28 @@
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
-using Portfolio.Client.Pages;
 using Portfolio.Server.Components;
+using Portfolio.Server.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
+// Add EF Core with SQLite (file-based)
+string connectionString = builder.Configuration.GetConnectionString("PortfolioDb") ?? "Data Source=portfolio.db";
+builder.Services.AddDbContext<PortfolioDbContext>(options => options.UseSqlite(connectionString));
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+    .AddInteractiveServerComponents();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
+
+// Ensure database exists and seed some data
+await Seeder.SeedInitialProjects(app);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-    app.UseWebAssemblyDebugging();
-} else {
+if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -25,13 +30,10 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(Portfolio.Client._Imports).Assembly);
+    .AddInteractiveServerRenderMode();
 
 app.Run();

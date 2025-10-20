@@ -8,8 +8,15 @@
 
 
     <ItemGroup>
-        <ProjectReference Include="..\Portfolio.Client\Portfolio.Client.csproj"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.*"/>
+        <PackageReference Include="MudBlazor" Version="8.13.0"/>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <AdditionalFiles Include="Components\Layout\MainLayout.razor"/>
+        <AdditionalFiles Include="Components\Layout\NavMenu.razor"/>
     </ItemGroup>
 
 </Project>

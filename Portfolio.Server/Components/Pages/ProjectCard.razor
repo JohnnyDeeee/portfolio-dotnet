@@ -1,0 +1,18 @@
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">@ProjectTitle</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText>
+            <MudText>@ProjectDescription</MudText>
+        </MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton>Read more</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [Parameter] public required string ProjectTitle { get; set; }
+    [Parameter] public required string ProjectDescription { get; set; }
+}
