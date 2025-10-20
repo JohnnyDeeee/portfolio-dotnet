@@ -1,3 +1,5 @@
+@inject NavigationManager NavigationManager
+
 <MudCard>
     <MudCardHeader>
         <MudText Typo="Typo.h3">@ProjectTitle</MudText>
@@ -8,11 +10,16 @@
         </MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton>Read more</MudButton>
+        <MudButton OnClick="@HandleClick">Read more</MudButton>
     </MudCardActions>
 </MudCard>
 
 @code {
     [Parameter] public required string ProjectTitle { get; set; }
     [Parameter] public required string ProjectDescription { get; set; }
+    [Parameter] public required int ProjectId { get; set; }
+
+    private void HandleClick() {
+        NavigationManager.NavigateTo($"/Project/{ProjectId}");
+    }
 }

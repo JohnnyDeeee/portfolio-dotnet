@@ -1,6 +1,5 @@
 @page "/"
-@using Portfolio.Server.Data
-@inject PortfolioDbContext Db
+@inject Data.PortfolioDbContext Db
 
 <PageTitle>Home</PageTitle>
 
@@ -17,7 +16,7 @@
         } else {
             @foreach (var p in _projects) {
                 <MudItem xs="12" sm="6" md="4">
-                    <ProjectCard ProjectTitle="@p.Title" ProjectDescription="@p.Description"/>
+                    <ProjectCard ProjectTitle="@p.Title" ProjectDescription="@p.Description" ProjectId="@p.Id" />
                 </MudItem>
             }
         }
@@ -25,7 +24,7 @@
 </MudContainer>
 
 @code {
-    private List<Project>? _projects;
+    private List<Data.Project>? _projects;
 
     protected override async Task OnInitializedAsync() {
         _projects = await Db.Projects.AsNoTracking().OrderBy(x => x.Id).ToListAsync();

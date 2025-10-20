@@ -1,0 +1,31 @@
+@page "/Project/{*id}"
+@using System.ComponentModel.DataAnnotations
+@using MudBlazor.Extensions
+@using Portfolio.Server.Data
+@inject PortfolioDbContext Db
+@inject NavigationManager NavigationManager
+<h3>Project</h3>
+
+<MudText>@ProjectObj.Title</MudText>
+<MudText>@ProjectObj.Description</MudText>
+
+@code {
+    [Parameter]
+    [RegularExpression(@"^\d+$", ErrorMessage = "Only digits are allowed.")]
+    public required string Id { get; set; }
+    public required Data.Project ProjectObj { get; set; }
+
+    protected override Task OnInitializedAsync() {
+        Data.Project? result = Db.Projects.AsNoTracking().FirstOrDefault(x => x.Id == int.Parse(Id)).As<Data.Project>();
+        // TODO: Remove AsNoTracking when logged in as admin
+
+        if (result is null) {
+            NavigationManager.NavigateTo("/404");
+        } else {
+            ProjectObj = result;
+        }
+
+        return Task.CompletedTask;
+    }
+
+}
