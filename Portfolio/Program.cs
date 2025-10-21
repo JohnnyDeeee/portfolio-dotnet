@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MudBlazor;
 using MudBlazor.Services;
-using Portfolio.Server.Components;
-using Portfolio.Server.Data;
+using Portfolio.Components;
+using Portfolio.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

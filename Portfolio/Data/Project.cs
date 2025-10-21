@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Portfolio.Server.Data;
+namespace Portfolio.Data;
 
 public class Project {
     public int Id { get; set; }

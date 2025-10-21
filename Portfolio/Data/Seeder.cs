@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Portfolio.Server.Data;
+namespace Portfolio.Data;
 
 public static class Seeder {
     public static async Task SeedInitialProjects(
