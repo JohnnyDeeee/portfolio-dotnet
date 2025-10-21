@@ -4,10 +4,9 @@
 @using Portfolio.Server.Data
 @inject PortfolioDbContext Db
 @inject NavigationManager NavigationManager
-<h3>Project</h3>
 
-<MudText>@ProjectObj.Title</MudText>
-<MudText>@ProjectObj.Description</MudText>
+<MudText Typo="Typo.h1">@ProjectObj.Title</MudText>
+<MudMarkdown Value="@ProjectObj.Description" HasTableOfContents="true"/>
 
 @code {
     [Parameter]

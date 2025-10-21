@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MudBlazor;
 using MudBlazor.Services;
 using Portfolio.Server.Components;
 using Portfolio.Server.Data;
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<PortfolioDbContext>(options => options.UseSqlite(c
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddMudMarkdownServices();
 
 WebApplication app = builder.Build();
 
