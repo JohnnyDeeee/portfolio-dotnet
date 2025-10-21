@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Portfolio.Data;
 
-public class PortfolioDbContext(DbContextOptions<PortfolioDbContext> options) : DbContext(options) {
+public class PortfolioDbContext : IdentityDbContext {
+    public PortfolioDbContext(DbContextOptions<PortfolioDbContext> options) : base(options) { }
+    
     public DbSet<Project> Projects => Set<Project>();
 }
