@@ -1,12 +1,12 @@
 @inject NavigationManager NavigationManager
 
-<MudCard>
+<MudCard Style="height: 25em;">
     <MudCardHeader>
         <MudText Typo="Typo.h3">@ProjectTitle</MudText>
     </MudCardHeader>
     <MudCardContent>
         <MudText>
-            <MudText>@ProjectDescription</MudText>
+            <MudText>@Truncate(ProjectDescription, 150)</MudText>
         </MudText>
     </MudCardContent>
     <MudCardActions>
@@ -22,4 +22,16 @@
     private void HandleClick() {
         NavigationManager.NavigateTo($"/Project/{ProjectId}");
     }
+
+    private string Truncate(
+        string value,
+        int maxLength
+    ) {
+        if (value.Length <= maxLength) {
+            return value;
+        }
+        
+        return value.Substring(0, maxLength) + "...";
+    }
+
 }
