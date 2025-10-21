@@ -1,0 +1,33 @@
+@page "/"
+@inject Data.PortfolioDbContext Db
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer Class="mt-4">
+    <MudGrid>
+        @if (_projects is null) {
+            <MudItem xs="12">
+                <MudText>Loading projects...</MudText>
+            </MudItem>
+        } else if (_projects.Count == 0) {
+            <MudItem xs="12">
+                <MudText>No projects found.</MudText>
+            </MudItem>
+        } else {
+            @foreach (var p in _projects) {
+                <MudItem xs="12" sm="6" md="4">
+                    <ProjectCard ProjectTitle="@p.Title" ProjectDescription="@p.Description" ProjectId="@p.Id" />
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<Data.Project>? _projects;
+
+    protected override async Task OnInitializedAsync() {
+        _projects = await Db.Projects.AsNoTracking().OrderBy(x => x.Id).ToListAsync();
+    }
+
+}
