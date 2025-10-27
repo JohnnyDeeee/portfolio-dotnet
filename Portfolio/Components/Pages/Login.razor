@@ -1,0 +1,42 @@
+@page "/login"
+@using System.Collections.Specialized
+@using MudBlazor
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager Nav
+
+<MudPaper Class="mx-auto mt-12 pa-6" Style="max-width: 420px;">
+    <MudText Typo="Typo.h4" Class="mb-4">Admin Login</MudText>
+
+    <form method="post" action="/auth/login">
+        <AntiforgeryToken/>
+
+        <MudTextField Label="Username" Required="true" name="username"
+                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person"
+                      T="string"/>
+
+        <MudTextField Label="Password" Required="true" name="password"
+                      InputType="InputType.Password" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Lock" Class="mt-3" T="string"/>
+
+        <input type="hidden" name="ReturnUrl" value="/"/>
+
+        @if (ShowError) {
+            <MudAlert Severity="Severity.Error" Class="mt-3">Invalid username or password.</MudAlert>
+        }
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" ButtonType="ButtonType.Submit">
+            <span>Login</span>
+        </MudButton>
+    </form>
+</MudPaper>
+
+@code {
+    private bool ShowError { get; set; }
+
+    protected override void OnParametersSet() {
+        Uri uri = new(Nav.Uri);
+        NameValueCollection query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        ShowError = string.Equals(query.Get("error"), "1", StringComparison.Ordinal);
+    }
+
+}

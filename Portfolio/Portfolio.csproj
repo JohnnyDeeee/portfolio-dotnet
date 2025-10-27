@@ -1,18 +1,40 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Portfolio</RootNamespace>
-    </PropertyGroup>
+      <UserSecretsId>8f6103cb-9533-4028-9f94-fe71f996081b</UserSecretsId>
+  </PropertyGroup>
 
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.*" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.*" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
         <PackageReference Include="MudBlazor" Version="8.13.0" />
         <PackageReference Include="MudBlazor.Markdown" Version="8.11.0" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 </Project>

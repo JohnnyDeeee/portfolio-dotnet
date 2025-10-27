@@ -1,3 +1,17 @@
-﻿<MudNavMenu>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+<MudNavMenu>
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <AuthorizeView>
+        <NotAuthorized>
+            <MudNavLink Href="/login" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
+        </NotAuthorized>
+        <Authorized>
+            <form method="post" action="/auth/logout" style="display:inline">
+                <AntiforgeryToken />
+                <MudButton StartIcon="@Icons.Material.Filled.Logout" Variant="Variant.Text" Color="Color.Inherit" Class="mud-nav-link" ButtonType="ButtonType.Submit">
+                    Logout
+                </MudButton>
+            </form>
+        </Authorized>
+    </AuthorizeView>
 </MudNavMenu>
